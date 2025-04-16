@@ -1,1 +1,1 @@
-# html-sitemap-genrator-all
+# html-sitemap-generator-wordpress
