@@ -1,1 +1,0 @@
-# html-sitemap-genrator-all

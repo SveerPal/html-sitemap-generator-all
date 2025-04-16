@@ -1,44 +1,44 @@
 <?php
 /*
-Plugin Name: HTML Sitemap Generator All 
+Plugin Name: All-Content HTML Sitemap Generator
 Plugin URI: https://codenskills.com
 Description: Display an HTML sitemap including pages, posts, authors, and custom post types.
 Version: 1.3
 Author: Yashvir Pal
 Author URI: https://yashvirpal.com
 License: GPL2
-Text Domain: html-sitemap-generator-all
+Text Domain: all-content-html-sitemap-generator
 */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-class HTML_Sitemap_Generator
+class YPHTML_Sitemap_Generator
 {
     public function __construct()
     {
-        add_shortcode('html_sitemap', [$this, 'generate_html_sitemap']);
-        add_action('admin_menu', [$this, 'html_sitemap_settings_menu']);
-        add_action('admin_init', [$this, 'html_sitemap_register_settings']);
+        add_shortcode('yphtml_sitemap', [$this, 'generate_yphtml_sitemap']);
+        add_action('admin_menu', [$this, 'yphtml_sitemap_settings_menu']);
+        add_action('admin_init', [$this, 'yphtml_sitemap_register_settings']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
     }
 
     // Register settings page
-    public function html_sitemap_settings_menu()
+    public function yphtml_sitemap_settings_menu()
     {
-        add_options_page('HTML Sitemap Settings', 'HTML Sitemap', 'manage_options', 'html-sitemap-settings', [$this, 'html_sitemap_settings_page']);
+        add_options_page('HTML Sitemap Settings', 'HTML Sitemap', 'manage_options', 'html-sitemap-settings', [$this, 'yphtml_sitemap_settings_page']);
     }
 
     // Settings page output
-    public function html_sitemap_settings_page()
+    public function yphtml_sitemap_settings_page()
     {
         ?>
         <div class="wrap">
             <h1>HTML Sitemap Settings</h1>
             <form method="post" action="options.php">
                 <?php
-                settings_fields('html_sitemap_options');
+                settings_fields('yphtml_sitemap_options');
                 do_settings_sections('html-sitemap-settings');
                 submit_button();
                 ?>
@@ -48,79 +48,79 @@ class HTML_Sitemap_Generator
     }
 
     // Register settings  
-    public function html_sitemap_register_settings()
+    public function yphtml_sitemap_register_settings()
     {
-        register_setting('html_sitemap_options', 'html_sitemap_show_posts', ['sanitize_callback' => 'sanitize_html_sitemap_show_posts']);
-        register_setting('html_sitemap_options', 'html_sitemap_show_authors', ['sanitize_callback' => 'sanitize_html_sitemap_show_authors']);
-        register_setting('html_sitemap_options', 'html_sitemap_show_taxonomies', ['sanitize_callback' => 'sanitize_html_sitemap_show_taxonomies']);
-        register_setting('html_sitemap_options', 'html_sitemap_per_page', ['sanitize_callback' => 'sanitize_html_sitemap_per_page']);
+        register_setting('yphtml_sitemap_options', 'yphtml_sitemap_show_posts', ['sanitize_callback' => 'sanitize_yphtml_sitemap_show_posts']);
+        register_setting('yphtml_sitemap_options', 'yphtml_sitemap_show_authors', ['sanitize_callback' => 'sanitize_yphtml_sitemap_show_authors']);
+        register_setting('yphtml_sitemap_options', 'yphtml_sitemap_show_taxonomies', ['sanitize_callback' => 'sanitize_yphtml_sitemap_show_taxonomies']);
+        register_setting('yphtml_sitemap_options', 'yphtml_sitemap_per_page', ['sanitize_callback' => 'sanitize_yphtml_sitemap_per_page']);
 
-        add_settings_section('html_sitemap_main_section', 'Sitemap Options', null, 'html-sitemap-settings');
+        add_settings_section('yphtml_sitemap_main_section', 'Sitemap Options', null, 'html-sitemap-settings');
 
         add_settings_field(
-            'html_sitemap_show_posts',
+            'yphtml_sitemap_show_posts',
             'Show Blog Posts',
-            [$this, 'html_sitemap_checkbox'],
+            [$this, 'yphtml_sitemap_checkbox'],
             'html-sitemap-settings',
-            'html_sitemap_main_section',
-            ['name' => 'html_sitemap_show_posts']
+            'yphtml_sitemap_main_section',
+            ['name' => 'yphtml_sitemap_show_posts']
         );
 
         add_settings_field(
-            'html_sitemap_show_authors',
+            'yphtml_sitemap_show_authors',
             'Show Authors',
-            [$this, 'html_sitemap_checkbox'],
+            [$this, 'yphtml_sitemap_checkbox'],
             'html-sitemap-settings',
-            'html_sitemap_main_section',
-            ['name' => 'html_sitemap_show_authors']
+            'yphtml_sitemap_main_section',
+            ['name' => 'yphtml_sitemap_show_authors']
         );
 
         add_settings_field(
-            'html_sitemap_show_taxonomies',
+            'yphtml_sitemap_show_taxonomies',
             'Show Taxonomies',
-            [$this, 'html_sitemap_checkbox'],
+            [$this, 'yphtml_sitemap_checkbox'],
             'html-sitemap-settings',
-            'html_sitemap_main_section',
-            ['name' => 'html_sitemap_show_taxonomies']
+            'yphtml_sitemap_main_section',
+            ['name' => 'yphtml_sitemap_show_taxonomies']
         );
 
         add_settings_field(
-            'html_sitemap_per_page',
+            'yphtml_sitemap_per_page',
             'Items Per Page',
-            [$this, 'html_sitemap_number_input'],
+            [$this, 'yphtml_sitemap_number_input'],
             'html-sitemap-settings',
-            'html_sitemap_main_section',
-            ['name' => 'html_sitemap_per_page']
+            'yphtml_sitemap_main_section',
+            ['name' => 'yphtml_sitemap_per_page']
         );
     }
 
 
     // Ensure these functions exist in your class or file
-    function sanitize_html_sitemap_show_posts($input)
+    function sanitize_yphtml_sitemap_show_posts($input)
     {
         return sanitize_text_field($input);
     }
 
-    function sanitize_html_sitemap_show_authors($input)
+    function sanitize_yphtml_sitemap_show_authors($input)
     {
         return sanitize_text_field($input);
     }
 
-    function sanitize_html_sitemap_show_taxonomies($input)
+    function sanitize_yphtml_sitemap_show_taxonomies($input)
     {
         return sanitize_text_field($input);
     }
 
-    function sanitize_html_sitemap_per_page($input)
+    function sanitize_yphtml_sitemap_per_page($input)
     {
         return absint($input);
     }
-    public function html_sitemap_checkbox($input)
+    public function yphtml_sitemap_checkbox($input)
     {
         return ($input === '1') ? '1' : '';
     }
 
-    public function html_sitemap_number_input($input)
+    public function yphtml_sitemap_number_input($input)
     {
         return absint($input);
     }
@@ -134,14 +134,14 @@ class HTML_Sitemap_Generator
 
 
     // Generate sitemap
-    public function generate_html_sitemap()
+    public function generate_yphtml_sitemap()
     {
         global $wpdb;
 
-        $show_posts = get_option('html_sitemap_show_posts', 'yes') === 'yes';
-        $show_authors = get_option('html_sitemap_show_authors', 'yes') === 'yes';
-        $show_taxonomies = get_option('html_sitemap_show_taxonomies', 'yes') === 'yes';
-        $per_page = (int) get_option('html_sitemap_per_page', 20);
+        $show_posts = get_option('yphtml_sitemap_show_posts', 'yes') === 'yes';
+        $show_authors = get_option('yphtml_sitemap_show_authors', 'yes') === 'yes';
+        $show_taxonomies = get_option('yphtml_sitemap_show_taxonomies', 'yes') === 'yes';
+        $per_page = (int) get_option('yphtml_sitemap_per_page', 20);
         if (isset($_GET['sitemap_page']) && isset($_GET['_wpnonce'])) {
             $nonce = sanitize_text_field(wp_unslash($_GET['_wpnonce'])); // Unslash and sanitize nonce
             if (!wp_verify_nonce($nonce, 'sitemap_pagination')) {
@@ -155,8 +155,8 @@ class HTML_Sitemap_Generator
         $offset = ($paged - 1) * $per_page;
 
         // **Check if cached data exists**
-        $cache_key = 'html_sitemap_data_' . $paged;
-        $results = wp_cache_get($cache_key, 'html_sitemap');
+        $cache_key = 'yphtml_sitemap_data_' . $paged;
+        $results = wp_cache_get($cache_key, 'yphtml_sitemap');
 
         if ($results === false) {
             $results = [];
@@ -221,7 +221,7 @@ class HTML_Sitemap_Generator
             });
 
             // **Cache the results**
-            wp_cache_set($cache_key, $results, 'html_sitemap', 3600); // Cache for 1 hour
+            wp_cache_set($cache_key, $results, 'yphtml_sitemap', 3600); // Cache for 1 hour
         }
 
         // **Pagination**
@@ -267,7 +267,7 @@ class HTML_Sitemap_Generator
     public function enqueue_styles()
     {
         wp_enqueue_style(
-            'html-sitemap-style',
+            'yphtml-sitemap-style',
             plugin_dir_url(__FILE__) . 'assets/style.css',
             [], // No dependencies
             '1.3' // Plugin version or use file modification time
@@ -277,4 +277,4 @@ class HTML_Sitemap_Generator
 }
 
 // Initialize the plugin
-new HTML_Sitemap_Generator();
+new YPHTML_Sitemap_Generator();

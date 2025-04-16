@@ -1,8 +1,8 @@
-=== HTML Sitemap Generator Advanced ===
+=== All-Content HTML Sitemap Generator ===
 Contributors: yashvirpal  
 Tags: html sitemap, seo, pages, posts, custom post types  
 Requires at least: 5.0  
-Tested up to: 6.7 
+Tested up to: 6.8
 Requires PHP: 7.4  
 Stable tag: 1.3
 License: GPL-2.0+  
@@ -12,14 +12,14 @@ Display an HTML sitemap including pages, posts, authors, and custom post types w
 
 == Description ==
 
-The **HTML Sitemap Generator** plugin lets you display a **user-friendly, paginated sitemap** of your website, including:
+The **All-Content HTML Sitemap Generator** plugin lets you display a **user-friendly, paginated sitemap** of your website, including:
 - Pages  
 - Blog posts  
 - Custom post types  
 - Authors  
 - Taxonomies  
 
-You can customize the sitemap display via the **Settings → HTML Sitemap** menu.
+You can customize the sitemap display via the **All-Content HTML Sitemap Generator** menu.
 
 == Installation ==
 
